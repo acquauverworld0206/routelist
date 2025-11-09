@@ -49,6 +49,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  adapter: postgresql
   # The DATABASE_URL environment variable is provided by the hosting service.
   url: <%= ENV["DATABASE_URL"] %>
