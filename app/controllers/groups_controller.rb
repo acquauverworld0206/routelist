@@ -27,8 +27,6 @@ class GroupsController < ApplicationController
   def show
     # @groupはbefore_actionでセットされます
     # フォームで使う、自分が登録したスポットの一覧
-    @candidate_spots = @group.candidate_spots.includes(:votes).order(created_at: :desc).compact
-    
     @my_spots = current_user.spots
     @candidate_spot = @group.candidate_spots.new
   end
