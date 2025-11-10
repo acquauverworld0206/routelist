@@ -14,7 +14,7 @@ class CandidateSpotsController < ApplicationController
     end
 
     # 新しい候補地を作成
-    @candidate_spot = @group.candidate_spots.new(spot: spot, added_by_user: current_user)
+    @candidate_spot = @group.candidate_spots.new(spot: spot, added_by: current_user)
 
     if @candidate_spot.save
       redirect_to group_path(@group), notice: "「#{spot.name}」を候補地に追加しました。"
