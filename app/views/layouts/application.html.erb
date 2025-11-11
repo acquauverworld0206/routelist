@@ -6,10 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-
-    <%# Google Maps JavaScript APIの読み込み %>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_maps_api_key %>&libraries=places" async></script>
   </head>
 
   <%# トップページではダークテーマ、それ以外はライトテーマを適用 %>
