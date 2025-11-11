@@ -3,4 +3,4 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 //= link application.js
-//= link roulette_model.js
+//= link roulette_modal.js 
