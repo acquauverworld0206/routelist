@@ -2,7 +2,7 @@
   <div class="bg-white shadow-md rounded-lg overflow-hidden">
     <%# 画像が添付されていれば表示 %>
     <% if @spot.photo.attached? %>
-      <%= image_tag @spot.photo, class: "w-full h-64 object-contain bg-gray-100" %>
+      <%= image_tag @spot.photo, class: "w-full h-96 object-contain bg-gray-100" %>
     <% end %>
 
     <div class="p-6">
