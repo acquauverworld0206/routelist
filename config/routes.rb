@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :spots
+  resources :spots do
+    collection do
+      post :random_draw
+    end
+  end
   resources :groups do
     collection do
       post :random_draw
