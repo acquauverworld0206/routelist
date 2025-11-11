@@ -56,8 +56,8 @@ class GroupsController < ApplicationController
   end
 
   def random_draw
-    # フォームから送信された抽選個数を取得（安全のため整数に変換）
-    count = params[:count].to_i
+    # 常に1つのスポットを抽選する
+    count = 1
 
     # 候補地リストを取得
     candidate_spots = @group.candidate_spots
