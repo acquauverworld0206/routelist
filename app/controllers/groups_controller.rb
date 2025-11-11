@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: [:show, :edit, :update, :random_draw]
+  before_action :set_group, only: [:show, :edit, :update, :random_draw, :destroy]
 
   def index
     # 自分が所属しているグループ（ホストとして作成したもの、またはメンバーとして参加しているもの）を一覧表示
@@ -51,6 +51,17 @@ class GroupsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    # グループのホストでなければ削除できないようにする
+    unless @group.host == current_user
+      redirect_to group_path(@group), alert: "グループを削除する権限がありません。"
+      return
+    end
+
+    @group.destroy
+    redirect_to groups_path, notice: "グループ「#{@group.name}」を削除しました。", status: :see_other
   end
 
   def random_draw

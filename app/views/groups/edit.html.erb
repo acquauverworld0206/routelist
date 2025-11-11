@@ -28,5 +28,11 @@
         <%= form.submit "更新する", class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-medium text-white bg-blue-500 hover:bg-blue-600 cursor-pointer" %>
       </div>
     <% end %>
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-red-500">グループを削除</h3>
+      <p class="text-sm text-gray-500 mt-1">この操作は元に戻せません。グループに関連するすべての情報（候補地、投票など）が削除されます。</p>
+      <%= button_to "グループを削除する", @group, method: :delete, data: { turbo_confirm: "本当によろしいですか？グループ「#{@group.name}」を完全に削除します。" }, class: "w-full mt-4 flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700" %>
+    </div>
   </div>
 </div>
