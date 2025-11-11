@@ -28,7 +28,7 @@
             <%# アカウント編集ページへのリンク %>
             <%= link_to "アカウント編集", edit_user_registration_path, { class: "text-gray-300 hover:text-white transition duration-150 ease-in-out" } %>
             <%# ログアウトボタン %>
-            <%= link_to "ログアウト", destroy_user_session_path, class: "py-1 px-3 rounded-full text-white bg-red-600 hover:bg-red-500 transition duration-150 ease-in-out shadow-md", data: { turbo_method: :delete } %>
+            <%= link_to "ログアウト", destroy_user_session_path, class: "py-1 px-3 rounded-full text-white bg-red-600 hover:bg-red-500 transition duration-150 ease-in-out shadow-md", data: { "turbo_method": :delete } %>
           </div>
         <% else %>
           <%# 新規登録ボタン %>
