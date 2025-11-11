@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :spots
   resources :groups do
     resources :invitations, only: [:create], controller: 'groups/invitations' # ネストされた作成アクション
-    resources :candidate_spots, only: [:create]
+    resources :candidate_spots, only: [:create, :destroy]
   end
 
   resources :candidate_spots, only: [] do

@@ -23,6 +23,13 @@ class CandidateSpotsController < ApplicationController
     end
   end
 
+  def destroy
+    @candidate_spot = @group.candidate_spots.find(params[:id])
+    spot_name = @candidate_spot.spot&.name || "候補地"
+    @candidate_spot.destroy
+    redirect_to group_path(@group), notice: "「#{spot_name}」を候補地から削除しました。", status: :see_other
+  end
+
   private
 
   def set_group

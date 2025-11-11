@@ -88,8 +88,9 @@
                   <% if user_vote %>
                     <%= button_to "投票取消", candidate_spot_vote_path(candidate, user_vote), method: :delete, class: "text-sm bg-gray-400 hover:bg-gray-500 text-white font-bold py-1 px-3 rounded" %>
                   <% else %>
-                      <%= button_to "投票する", candidate_spot_votes_path(candidate), method: :post, class: "text-sm bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-3 rounded" %>
+                    <%= button_to "投票する", candidate_spot_votes_path(candidate), method: :post, class: "text-sm bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-3 rounded" %>
                   <% end %>
+                  <%= button_to "削除", group_candidate_spot_path(@group, candidate), method: :delete, data: { turbo_confirm: "この候補地をリストから削除しますか？" }, class: "text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded" %>
                 </div>
               </li>
             <% end %>
