@@ -69,18 +69,14 @@
       <div class="bg-white shadow-md rounded-lg">
         <ul class="divide-y divide-gray-200">
           <% if @group.candidate_spots.any? %>
-            <%# .includes(:spot)でN+1問題を解消 %>
-            <% @group.candidate_spots.includes(:spot, :added_by, :votes).each do |candidate| %> 
-              <%# 元のスポットが存在する場合のみリスト項目を表示する %>
+            <% @group.candidate_spots.includes(:spot, :added_by, :votes, :voted_users).each do |candidate| %>
               <li class="p-4 flex items-center justify-between gap-4">
                 <div class="flex-grow flex items-center space-x-4 min-w-0">
                   <%# 画像があれば表示し、なければプレースホルダーを表示 %>
                   <% if candidate.spot&.photo&.attached? %>
                     <%= image_tag candidate.spot.photo.variant(resize_to_limit: [100, 100]), class: "h-16 w-16 rounded-md object-contain bg-gray-100" %>
                   <% else %>
-                    <div class="h-16 w-16 rounded-md bg-gray-200 flex items-center justify-center">
-                      <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    </div>
+                    <div class="h-16 w-16 rounded-md bg-gray-200 flex items-center justify-center"><svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
                   <% end %>
                   <div class="min-w-0">
                     <%= link_to candidate.spot&.name || "（削除されたスポット）", spot_path(candidate.spot), class: "font-semibold text-lg text-gray-900 hover:underline truncate" %>
@@ -90,8 +86,8 @@
                 <%# 投票ボタンと投票数 %>
                 <div class="flex-shrink-0 flex items-center space-x-2">
                   <span class="text-gray-600 font-bold"><%= candidate.votes.count %> 票</span>
-                  <% user_vote = candidate.votes.find_by(user_id: current_user.id) %>
-                  <% if user_vote %>
+                  <% if candidate.voted_users.include?(current_user) %>
+                    <% user_vote = candidate.votes.find_by(user_id: current_user.id) %>
                     <%= button_to "投票取消", candidate_spot_vote_path(candidate, user_vote), method: :delete, class: "text-sm bg-gray-400 hover:bg-gray-500 text-white font-bold py-1 px-3 rounded" %>
                   <% else %>
                     <%= button_to "投票する", candidate_spot_votes_path(candidate), method: :post, class: "text-sm bg-orange-500 hover:bg-orange-600 text-white font-bold py-1 px-3 rounded" %>

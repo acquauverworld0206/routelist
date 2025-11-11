@@ -25,8 +25,6 @@ class GroupsController < ApplicationController
   end
 
   def show
-    # 候補スポットのリストを効率的に取得
-    @candidate_spots = @group.candidate_spots.includes(:votes, :added_by, :spot).order(created_at: :desc)
     # フォームで使うスポットのリスト
     @my_spots = current_user.spots
     # 新しい候補地追加フォーム用のオブジェクト
